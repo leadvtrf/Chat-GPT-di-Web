@@ -1,0 +1,107 @@
+
+<html>
+<head>
+    <title>Chat Box</title>
+</head>
+<body>
+    <div id="chatbox">
+        <h1>ChatGPT di Web</h1>
+    </div>
+</body>
+</html>
+<style type="text/css">
+    #chatbox { 
+        width: 400px; 
+        height: 300px; 
+        border: 1px solid #ccc; 
+        margin: 0 auto; 
+        padding: 10px; 
+    }
+
+    #chatbox h1 { 
+        font-size: 18px; 
+        font-weight: bold; 
+        text-align: center; 
+    }
+
+    #chatbox .message { 
+        padding: 10px; 
+        margin-bottom: 10px; 
+        border-bottom: 1px solid #ccc; 
+    }
+
+    #chatbox .message .name { 
+        font-weight: bold; 
+    }
+
+    #chatbox .message .time { 
+        font-size: 11px; 
+        color: #999; 
+    }
+
+    #chatbox form { 
+        padding: 10px; 
+        margin-top: 10px; 
+    }
+
+    #chatbox form input[type="text"] { 
+        width: 300px; 
+        padding: 5px; 
+    }
+
+    #chatbox form input[type="submit"] { 
+        width: 100px; 
+        padding: 5px; 
+    }
+
+    #chatbox form input[type="submit"]:hover { 
+        background-color: #ccc; 
+    }
+
+ </style>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ <script type="text/javascript">
+
+     $(document).ready(function(){
+
+         // Mengirim pesan ke server melalui Ajax ketika tombol submit diklik.
+
+         $('#chatbox form').submit(function(e){
+
+             e.preventDefault(); // Mencegah halaman dari reloading ketika tombol submit diklik.
+
+             var message = $('#chatbox form input[name="message"]').val(); // Mengambil nilai dari input dengan nama "message".
+
+             $.ajax({ // Menggunakan Ajax untuk mengirim pesan ke server.
+
+                 url : 'send_message.php', // URL yang akan digunakan untuk mengirim pesan ke server.
+
+                 type : 'POST', // Menggunakan metode POST untuk mengirim data ke server.
+
+                 data : { // Data yang akan dikirim ke server.
+
+                     message : message // Nilai dari input dengan nama "message".
+
+                 },
+
+                 success : function(data){ // Fungsi yang akan dipanggil ketika pesan berhasil dikirim ke server.
+
+                     $('#chatbox form input[name="message"]').val(''); // Menghapus nilai dari input dengan nama "message".
+
+                     getMessages(); // Memanggil fungsi getMessages() untuk memperbarui chat box dengan pesan baru yang telah dikirim ke server.
+
+                 }
+
+             });
+
+         });
+
+         // Meminta pesan baru dari server melalui Ajax setiap 5 detik sekali.
+
+         setInterval(getMessages, 5000); // Memanggil fungsi getMessages() setiap 5 detik sekali (5000 milidetik).
+
+         function getMessages(){ // Fungsi untuk meminta pesan baru dari server melalui Ajax.
+
+             $.ajax({ // Menggunak
+</script>
